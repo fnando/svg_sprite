@@ -1,0 +1,13 @@
+@import "./icons";
+
+.sass-after {
+  @include sprite-after("blue-square");
+}
+
+.sass-before {
+  @include sprite-before("orange-square");
+}
+
+.sass-inner {
+  @extend %sprite-green-square;
+}

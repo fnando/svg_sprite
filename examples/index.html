@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="dist/scss.css">
+  <link rel="stylesheet" href="dist/css.css">
+
+  <style>
+    [class*="after"]:after,
+    [class*="before"]:before {
+      content: "";
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sass</h1>
+  <p class="sass-after">after</p>
+  <p class="sass-before">before</p>
+  <p class="sass-inner"></p>
+
+  <h1>CSS</h1>
+  <p class="sprite-blue-square-after">after</p>
+  <p class="sprite-orange-square-before">before</p>
+  <p class="sprite-green-square"></p>
+</body>
+</html>
