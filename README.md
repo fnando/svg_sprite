@@ -1,6 +1,6 @@
 # SvgSprite
 
-Create SVG sprites by embedding images into CSS using data URIs.
+Create SVG sprites by embedding images into CSS using data URIs. The SVGs are optimized using [svg_optimizer](https://github.com/fnando/svg_optimizer).
 
 ## Installation
 
@@ -62,6 +62,63 @@ Let's say the `images/icons` directory has a file called `user.svg`. The command
 // this mixin will set the background image on the element's `:after` pseudo-element.
 .icons-user-after
 ```
+
+### Programming API
+
+To generate the sprite without saving the file:
+
+```ruby
+require "svg_sprite"
+rendered_css = SvgSprite.create({
+  source: "./images/icons",
+  format: "scss",
+  name: "icons"
+}).render
+```
+
+To save the sprite content to a file:
+
+```ruby
+require "svg_sprite"
+rendered_css = SvgSprite.export({
+  source: "./images/icons",
+  output: "./styles/_icons.scss",
+  format: "scss",
+  name: "icons"
+})
+```
+
+#### Adding new formats
+
+First, register your template renderer. The assigned object should respond to `call(source, options)`.
+
+```ruby
+# `source` is SvgSprite::Source, which wraps all SVG files.
+# Each item returned by `source` is a SvgSprite::SVG instance.
+SvgSprite::TEMPLATES["custom"] = proc do |source, options|
+  content = source.to_a.map(&:name).join("\n")
+  "/*\nImage names:\n#{content}\n*/"
+end
+```
+
+Then you can generate the sprite like the following:
+
+```ruby
+rendered_css = SvgSprite.create({
+  source: "./examples",
+  format: "custom",
+  name: "icons"
+}).render
+#=> /*
+#=> Image names:
+#=> blue-square
+#=> orange-square
+#=> green-square
+#=> yellow-square
+#=> */
+```
+
+See what's available in [SvgSprite::SVG](https://github.com/fnando/svg_sprite/blob/master/lib/svg_sprite/svg.rb) class.
 
 ## Development
 
