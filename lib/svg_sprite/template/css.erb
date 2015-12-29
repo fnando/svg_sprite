@@ -3,7 +3,7 @@
 .<%= options[:name] %>-<%= svg.name %>,
 .<%= options[:name] %>-<%= svg.name %>-before:before,
 .<%= options[:name] %>-<%= svg.name %>-after:after {
-  background-image: url(data:image/svg+xml;base64,<%= svg.base64 %>);
+  background-image: url(<%= svg.data_uri %>);
   <%- if svg.has_dimensions? -%>
   width: <%= svg.width %>;
   height: <%= svg.height %>;

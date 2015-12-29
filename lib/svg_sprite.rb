@@ -1,6 +1,7 @@
 module SvgSprite
-  require "erb"
   require "base64"
+  require "cgi"
+  require "erb"
   require "svg_optimizer"
   require "thor"
 

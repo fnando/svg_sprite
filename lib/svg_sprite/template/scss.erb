@@ -15,7 +15,7 @@ $<%= options[:name] %>-names: (<%= names(source) %>);
 
 <% for svg in source %>
 %<%= options[:name] %>-<%= svg.name %> {
-  background-image: url(data:image/svg+xml;base64,<%= svg.base64 %>);
+  background-image: url(<%= svg.data_uri %>);
   <%- if svg.has_dimensions? -%>
   width: <%= svg.width %>;
   height: <%= svg.height %>;
