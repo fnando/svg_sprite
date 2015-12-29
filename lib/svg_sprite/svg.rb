@@ -51,7 +51,7 @@ module SvgSprite
       Base64.strict_encode64(optimized)
     end
 
-    # Return the smaller data URI
+    # Return the smaller data URI.
     def data_uri
       [base64_data_uri, urlencoded_data_uri].sort_by(&:bytesize).first
     end
