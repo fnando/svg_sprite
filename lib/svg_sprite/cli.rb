@@ -6,6 +6,10 @@ module SvgSprite
       true
     end
 
+    def self.formats
+      TEMPLATES.keys
+    end
+
     desc "version", "Display svg_sprite version"
     map %w[-v --version] => :version
 
@@ -15,11 +19,12 @@ module SvgSprite
 
     desc "generate", "Generate the SVG sprite by embedding the images as data URIs."
     option :source, aliases: %w[-s], required: true, desc: "The source directory. Will match SOURCE/**/*.svg."
-    option :output, aliases: %w[-o], required: true, desc: "The output file. Must be a file with a known format extension (#{OUTPUT_FORMATS.join(", ")})"
+    option :output, aliases: %w[-o], required: true, desc: "The output file."
     option :name, aliases: %w[-n], default: "sprite", desc: "The sprite name. This will be used as the variable for dynamic files."
+    option :format, aliases: %w[-f], desc: "The output format. When not provided, will be inferred from output file's extension. Can be any of #{formats.join("|")}."
     def generate
-      format = File.extname(options["output"])[1..-1]
-      fail Error, "ERROR: invalid output extension. Must be one of #{OUTPUT_FORMATS.join("|")}." unless valid_format?(format)
+      format = options["format"] || File.extname(options["output"])[1..-1]
+      fail Error, "ERROR: invalid output format. Must be one of #{formats.join("|")}." unless valid_format?(format)
 
       SvgSprite.export(
         source: File.expand_path(options["source"]),
@@ -32,7 +37,11 @@ module SvgSprite
     private
 
     def valid_format?(format)
-      OUTPUT_FORMATS.include?(format)
+      formats.include?(format)
+    end
+
+    def formats
+      self.class.formats
     end
   end
 end

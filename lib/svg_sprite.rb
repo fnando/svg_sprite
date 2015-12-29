@@ -5,19 +5,14 @@ module SvgSprite
   require "svg_optimizer"
   require "thor"
 
-  OUTPUT_FORMATS = %w[scss css].freeze
-  require "svg_sprite/cli"
   require "svg_sprite/version"
   require "svg_sprite/template/scss"
   require "svg_sprite/template/css"
+  require "svg_sprite/template"
   require "svg_sprite/sprite"
   require "svg_sprite/source"
   require "svg_sprite/svg"
-
-  TEMPLATES = {
-    "scss" => Template::SCSS.new,
-    "css"  => Template::CSS.new
-  }
+  require "svg_sprite/cli"
 
   def self.create(options)
     Sprite.new(
