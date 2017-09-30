@@ -43,7 +43,7 @@ module SvgSprite
 
     # Return the URL-encoded version of the content.
     def encoded
-      CGI.escape(contents)
+      URI.escape(contents)
     end
 
     # Return the Base64-encoded version of the content.
