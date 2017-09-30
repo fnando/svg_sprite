@@ -4,6 +4,7 @@ module SvgSprite
   require "erb"
   require "svg_optimizer"
   require "thor"
+  require "fileutils"
 
   require "svg_sprite/version"
   require "svg_sprite/template/scss"
