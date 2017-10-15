@@ -23,12 +23,12 @@ module SvgSprite
 
     # Return the <svg>'s width.
     def width
-      svg["width"]
+      "#{svg["width"]}#{ensure_unit(svg["width"])}"
     end
 
     # Return the <svg>'s height.
     def height
-      svg["height"]
+      "#{svg["height"]}#{ensure_unit(svg["height"])}"
     end
 
     # Return the raw content. This content is not optimized by svg_optimizer.
@@ -69,6 +69,10 @@ module SvgSprite
     # The output encoding based on the global configuration.
     def encoding
       Encoding.default_external.name
+    end
+
+    private def ensure_unit(number)
+      return "px" if number =~ /\A\d+\z/
     end
   end
 end
