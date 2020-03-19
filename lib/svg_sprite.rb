@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module SvgSprite
   require "base64"
-  require "uri"
+  require "cgi"
   require "erb"
   require "svg_optimizer"
   require "thor"
@@ -31,6 +33,6 @@ module SvgSprite
   end
 
   def self.find_template(format)
-    TEMPLATES[format] || fail("Invalid output format.")
+    TEMPLATES[format] || raise("Invalid output format.")
   end
 end

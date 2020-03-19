@@ -1,0 +1,18 @@
+---
+inherit_gem:
+  rubocop-fnando: .rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+
+Metrics/AbcSize:
+  Exclude:
+    - lib/svg_sprite/cli.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - lib/svg_sprite/cli.rb
+
+Layout/LineLength:
+  Exclude:
+    - lib/svg_sprite/cli.rb

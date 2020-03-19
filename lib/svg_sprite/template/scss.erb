@@ -25,7 +25,7 @@ $<%= options[:name] %>-urls: (
 <% for svg in source %>
 %<%= options[:name] %>-<%= svg.name %> {
   background-image: url(<%= options[:name] %>-url("<%= svg.name %>"));
-  <%- if svg.has_dimensions? -%>
+  <%- if svg.dimensions? -%>
   width: <%= svg.width %>;
   height: <%= svg.height %>;
   <%- end -%>

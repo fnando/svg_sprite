@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SvgSprite
   class Sprite
     def initialize(source, template, options)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SvgSprite
   class SVG
     attr_reader :path
@@ -12,7 +14,7 @@ module SvgSprite
     end
 
     # Detect if SVG has all dimensions defined.
-    def has_dimensions?
+    def dimensions?
       width && height
     end
 
@@ -23,12 +25,12 @@ module SvgSprite
 
     # Return the <svg>'s width.
     def width
-      "#{svg["width"]}#{ensure_unit(svg["width"])}"
+      "#{svg['width']}#{ensure_unit(svg['width'])}"
     end
 
     # Return the <svg>'s height.
     def height
-      "#{svg["height"]}#{ensure_unit(svg["height"])}"
+      "#{svg['height']}#{ensure_unit(svg['height'])}"
     end
 
     # Return the raw content. This content is not optimized by svg_optimizer.
@@ -43,7 +45,7 @@ module SvgSprite
 
     # Return the URL-encoded version of the content.
     def encoded
-      URI.escape(contents)
+      CGI.escape(contents)
     end
 
     # Return the Base64-encoded version of the content.
@@ -53,7 +55,7 @@ module SvgSprite
 
     # Return the smaller data URI.
     def data_uri
-      [base64_data_uri, urlencoded_data_uri].sort_by(&:bytesize).first
+      [base64_data_uri, urlencoded_data_uri].min_by(&:bytesize)
     end
 
     # Return the Base64 version of the data URI.

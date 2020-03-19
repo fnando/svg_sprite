@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SvgSprite
   module Template
     class CSS
@@ -6,7 +8,7 @@ module SvgSprite
       end
 
       def call(source, options)
-        ERB.new(template, nil, "-").result binding
+        ERB.new(template, trim_mode: "-").result binding
       end
     end
   end
