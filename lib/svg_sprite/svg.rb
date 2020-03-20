@@ -1,80 +1,66 @@
 # frozen_string_literal: true
 
-module SvgSprite
+class SvgSprite
   class SVG
-    attr_reader :path
+    attr_reader :filepath, :optimize, :stroke, :fill
 
-    def initialize(path)
-      @path = path
+    def initialize(filepath, optimize:, stroke:, fill:)
+      @filepath = filepath
+      @optimize = optimize
+      @stroke = stroke
+      @fill = fill
     end
 
-    # Return the image file name without the extension.
-    def name
-      File.basename(path, ".*")
+    def symbol
+      @symbol ||= xml.css("svg").first.clone.tap do |node|
+        node.name = "symbol"
+        node.set_attribute :id, id
+
+        process_stroke(node)
+        process_fill(node)
+      end
     end
 
-    # Detect if SVG has all dimensions defined.
-    def dimensions?
-      width && height
-    end
-
-    # Return a Nokogiri representation of the <svg> element.
-    def svg
-      @svg ||= Nokogiri::XML(contents).css("svg").first
-    end
-
-    # Return the <svg>'s width.
     def width
-      "#{svg['width']}#{ensure_unit(svg['width'])}"
+      symbol[:width]
     end
 
-    # Return the <svg>'s height.
     def height
-      "#{svg['height']}#{ensure_unit(svg['height'])}"
+      symbol[:height]
     end
 
-    # Return the raw content. This content is not optimized by svg_optimizer.
-    def contents
-      @contents ||= File.read(path)
+    def id
+      File.basename(filepath, ".*")
     end
 
-    # Return the optimized content.
-    def optimized
-      @optimized ||= SvgOptimizer.optimize(contents)
+    private def xml
+      @xml ||= begin
+        contents = File.read(filepath)
+        contents = SvgOptimizer.optimize(contents) if optimize
+        Nokogiri::XML(contents)
+      end
     end
 
-    # Return the URL-encoded version of the content.
-    def encoded
-      CGI.escape(contents)
+    private def process_stroke(node)
+      process_attribute(node, "stroke", stroke)
     end
 
-    # Return the Base64-encoded version of the content.
-    def base64
-      Base64.strict_encode64(optimized)
+    private def process_fill(node)
+      process_attribute(node, "fill", fill)
     end
 
-    # Return the smaller data URI.
-    def data_uri
-      [base64_data_uri, urlencoded_data_uri].min_by(&:bytesize)
-    end
+    private def process_attribute(symbol, attribute, value)
+      return unless value
 
-    # Return the Base64 version of the data URI.
-    def base64_data_uri
-      %[data:image/svg+xml;base64,#{base64}]
-    end
+      symbol.css("[#{attribute}]").each do |node|
+        if value == "current-color" && node[attribute] != "none"
+          node.set_attribute(attribute, "currentColor")
+        end
 
-    # Return the URL-encoded version of the data URI.
-    def urlencoded_data_uri
-      %[data:image/svg+xml;charset=#{encoding},#{encoded}]
-    end
-
-    # The output encoding based on the global configuration.
-    def encoding
-      Encoding.default_external.name
-    end
-
-    private def ensure_unit(number)
-      return "px" if number =~ /\A\d+\z/
+        if value == "remove" && node[attribute] != "none"
+          node.remove_attribute(attribute)
+        end
+      end
     end
   end
 end

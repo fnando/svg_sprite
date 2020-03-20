@@ -3,26 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="dist/scss.css">
-  <link rel="stylesheet" href="dist/css.css">
+  <link rel="stylesheet" href="./sprite/remove.css">
 
   <style>
-    [class*="after"]:after,
-    [class*="before"]:before {
-      content: "";
-      display: inline-block;
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 0;
+    }
+
+    .remove svg {
+      fill: #4e74ff;
+    }
+
+    h1 {
+      color: #000;
+      font-family: sans-serif;
+      font-size: 18px;
+    }
+
+    h1 ~ h1 {
+      margin-top: 25px;
+    }
+
+    .container {
+      padding: 25px;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .orange {
+      color: orange;
     }
   </style>
 </head>
 <body>
-  <h1>Sass</h1>
-  <p class="sass-after">after</p>
-  <p class="sass-before">before</p>
-  <p class="sass-inner"></p>
+  <div class="container">
+    <h1>SVG with original color</h1>
+    <svg class="icon--trash">
+      <use href="./sprite/original.svg#trash" role="presentation">
+    </svg>
 
-  <h1>CSS</h1>
-  <p class="sprite-blue-square-after">after</p>
-  <p class="sprite-orange-square-before">before</p>
-  <p class="sprite-green-square"></p>
+    <svg class="icon--trash-fill">
+      <use href="./sprite/original.svg#trash-fill" role="presentation">
+    </svg>
+
+    <h1>SVG using stroke and fill from CSS</h1>
+    <div class="remove">
+      <svg class="icon--trash">
+        <use href="./sprite/remove.svg#trash" role="presentation">
+      </svg>
+
+      <svg class="icon--trash-fill">
+        <use href="./sprite/remove.svg#trash-fill" role="presentation">
+      </svg>
+    </div>
+
+    <h1>SVG using currentColor from parent element</h1>
+    <span class="red">
+      <svg class="icon--trash">
+        <use href="./sprite/current-color.svg#trash" role="presentation">
+      </svg>
+
+      <svg class="icon--trash-fill">
+        <use href="./sprite/current-color.svg#trash-fill" role="presentation">
+      </svg>
+    </span>
+    <span class="green">
+      <svg class="icon--trash">
+        <use href="./sprite/current-color.svg#trash" role="presentation">
+      </svg>
+
+      <svg class="icon--trash-fill">
+        <use href="./sprite/current-color.svg#trash-fill" role="presentation">
+      </svg>
+    </span>
+    <span class="orange">
+      <svg class="icon--trash">
+        <use href="./sprite/current-color.svg#trash" role="presentation">
+      </svg>
+
+      <svg class="icon--trash-fill">
+        <use href="./sprite/current-color.svg#trash-fill" role="presentation">
+      </svg>
+    </span>
+  </div>
 </body>
 </html>
