@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["fnando.vieira@gmail.com"]
 
-  spec.summary       = "Create SVG sprites using data URIs."
+  spec.summary       = "Create SVG sprites using SVG links."
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/fnando/svg_sprite"
   spec.license       = "MIT"
