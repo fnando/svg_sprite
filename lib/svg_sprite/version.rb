@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module SvgSprite
+class SvgSprite
   VERSION = "0.2.3"
 end
