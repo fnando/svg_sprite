@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = SvgSprite::VERSION
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["fnando.vieira@gmail.com"]
+  spec.required_ruby_version = ">= 2.7"
 
   spec.summary       = "Create SVG sprites using SVG links."
   spec.description   = spec.summary

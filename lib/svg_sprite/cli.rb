@@ -32,7 +32,8 @@ class SvgSprite
     option :name,
            aliases: %w[-n],
            default: "sprite",
-           desc: "The sprite name. This will be used as the variable for dynamic files."
+           desc: "The sprite name. This will be used as the variable for " \
+                 "dynamic files."
     option :optimize,
            aliases: %w[-o],
            default: true,

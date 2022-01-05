@@ -5,18 +5,5 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 2.7
 
-Layout/LineLength:
-  Exclude:
-    - lib/svg_sprite/cli.rb
-
-Metrics/ParameterLists:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/ClassLength:
+Metrics:
   Enabled: false
