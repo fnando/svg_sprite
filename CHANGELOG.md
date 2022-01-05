@@ -11,6 +11,8 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
-## Unreleased
+## v1.0.1
 
-- Initial release.
+- [Changed] SVG sprite now includes the sprite name as the id. It means you'll
+  to use a link href like `#icons--trash` (previously the sprite name wasn't
+  included).
