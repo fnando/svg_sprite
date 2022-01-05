@@ -136,7 +136,7 @@ class SvgSprite
         xmlns: "http://www.w3.org/2000/svg",
         style: "display: none"
       ) do |svg|
-        svg.defs { }
+        svg.defs { } # rubocop:disable Lint/EmptyBlock
       end
     end
   end
