@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nando Vieira"]
   spec.email         = ["fnando.vieira@gmail.com"]
   spec.required_ruby_version = ">= 2.7"
+  spec.metadata = {"rubygems_mfa_required" => "true"}
 
   spec.summary       = "Create SVG sprites using SVG links."
   spec.description   = spec.summary
@@ -26,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
 
   spec.add_development_dependency "bundler"
+  spec.add_development_dependency "css_parser"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "minitest-utils"
   spec.add_development_dependency "pry-meta"

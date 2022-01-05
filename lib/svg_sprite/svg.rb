@@ -2,9 +2,10 @@
 
 class SvgSprite
   class SVG
-    attr_reader :filepath, :optimize, :stroke, :fill
+    attr_reader :filepath, :name, :optimize, :stroke, :fill
 
-    def initialize(filepath, optimize:, stroke:, fill:)
+    def initialize(filepath, name:, optimize:, stroke:, fill:)
+      @name = name
       @filepath = filepath
       @optimize = optimize
       @stroke = stroke
@@ -30,7 +31,7 @@ class SvgSprite
     end
 
     def id
-      File.basename(filepath, ".*")
+      @id ||= [name, File.basename(filepath, ".*")].join("--")
     end
 
     private def xml

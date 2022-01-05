@@ -31,7 +31,7 @@ class SvgSprite
            desc: "The SVG output file path."
     option :name,
            aliases: %w[-n],
-           default: "sprite",
+           default: DEFAULT_SPRITE_NAME,
            desc: "The sprite name. This will be used as the variable for " \
                  "dynamic files."
     option :optimize,

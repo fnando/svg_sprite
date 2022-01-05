@@ -1,24 +1,31 @@
 # frozen_string_literal: true
 
+require "svg_optimizer"
+require "thor"
+require "fileutils"
+require "shellwords"
+require "pathname"
+
 class SvgSprite
-  require "svg_optimizer"
-  require "thor"
-  require "fileutils"
-  require "shellwords"
-  require "pathname"
-
-  require "svg_sprite/version"
-  require "svg_sprite/cli"
-  require "svg_sprite/svg"
-
   NOKOGIRI_SAVE_OPTIONS = {
     save_with: Nokogiri::XML::Node::SaveOptions::DEFAULT_XML |
                Nokogiri::XML::Node::SaveOptions::NO_DECLARATION
   }.freeze
 
+  DEFAULT_SPRITE_NAME = "sprite"
+
+  require "svg_sprite/version"
+  require "svg_sprite/cli"
+  require "svg_sprite/svg"
+
   def self.call(
-    name:, input:, sprite_path:, css_path:,
-    optimize: true, stroke: nil, fill: nil
+    input:,
+    sprite_path:,
+    css_path:,
+    name: DEFAULT_SPRITE_NAME,
+    optimize: true,
+    stroke: nil,
+    fill: nil
   )
     new(
       name: name,
@@ -28,7 +35,7 @@ class SvgSprite
       optimize: optimize,
       stroke: stroke,
       fill: fill
-    ).call
+    ).tap(&:call)
   end
 
   attr_reader :name, :sprite_path, :input, :css_path, :optimize, :stroke, :fill,
@@ -50,6 +57,7 @@ class SvgSprite
   def call
     save_file sprite_path, svg_sprite
     save_file css_path, manifest(css_definitions.chomp)
+    self
   end
 
   private def manifest(css)
@@ -79,7 +87,8 @@ class SvgSprite
       Pathname.new(css_path).relative_path_from(cwd).to_s
     ]
 
-    cmd.push("--optimize") if optimize
+    cmd.push("--name", name) if name != DEFAULT_SPRITE_NAME
+    cmd.push("--no-optimize") unless optimize
     cmd.push("--stroke", stroke) if stroke
     cmd.push("--fill", fill) if fill
 
@@ -87,16 +96,20 @@ class SvgSprite
   end
 
   private def svgs
-    @svgs ||= input_files.map do |file|
-      SVG.new(file, optimize: optimize, stroke: stroke, fill: fill)
-    end
+    @svgs ||= input_files
+              .map {|file| build_svg(file) }
+              .sort_by(&:id)
+  end
+
+  private def build_svg(file)
+    SVG.new(file, name: name, optimize: optimize, stroke: stroke, fill: fill)
   end
 
   private def css_definitions
-    svgs.each_with_object(StringIO.new) do |file, io|
-      io << ".#{name}--#{file.id} {\n"
-      io << "  width: #{file.width}px;\n"
-      io << "  height: #{file.height}px;\n"
+    svgs.each_with_object(StringIO.new) do |svg, io|
+      io << ".#{svg.id} {\n"
+      io << "  width: #{svg.width};\n"
+      io << "  height: #{svg.height};\n"
       io << "}\n\n"
     end.tap(&:rewind).read.chomp
   end
