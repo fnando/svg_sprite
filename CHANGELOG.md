@@ -11,7 +11,7 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
-## Unreleased
+## v1.0.2
 
 - [Changed] Remove `<symbol>`'s `width` and `height` property, otherwise Google
   Chrome and Firefox won't be able to resize the SVG properly. The `viewBox`
