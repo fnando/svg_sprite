@@ -11,6 +11,12 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
+## Unreleased
+
+- [Changed] Remove `<symbol>`'s `width` and `height` property, otherwise Google
+  Chrome and Firefox won't be able to resize the SVG properly. The `viewBox`
+  will determine the svg's dimensions.
+
 ## v1.0.1
 
 - [Changed] SVG sprite now includes the sprite name as the id. It means you'll

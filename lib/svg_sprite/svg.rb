@@ -12,10 +12,16 @@ class SvgSprite
       @fill = fill
     end
 
+    def svg
+      @svg ||= xml.css("svg").first
+    end
+
     def symbol
-      @symbol ||= xml.css("svg").first.clone.tap do |node|
+      @symbol ||= svg.clone.tap do |node|
         node.name = "symbol"
         node.set_attribute :id, id
+        node.remove_attribute "width"
+        node.remove_attribute "height"
 
         process_stroke(node)
         process_fill(node)
@@ -23,11 +29,11 @@ class SvgSprite
     end
 
     def width
-      symbol[:width]
+      svg[:width]
     end
 
     def height
-      symbol[:height]
+      svg[:height]
     end
 
     def id

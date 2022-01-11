@@ -61,16 +61,14 @@ class SvgSpriteTest < Minitest::Test
     symbol = symbols.first
 
     assert_equal "sprite--trash", symbol[:id]
-    assert_equal "16px", symbol[:width]
-    assert_equal "16px", symbol[:height]
     assert_equal "#FF0000", symbol.css("path").first[:fill]
+    assert_equal "0 0 16 16", symbol[:viewBox]
 
     symbol = symbols.last
 
     assert_equal "sprite--trash-filled", symbol[:id]
-    assert_equal "16px", symbol[:width]
-    assert_equal "16px", symbol[:height]
     assert_equal "#727272", symbol.css("g > g").first[:fill]
+    assert_equal "0 0 16 16", symbol[:viewBox]
   end
 
   test "generates svg file using current color" do
@@ -91,16 +89,14 @@ class SvgSpriteTest < Minitest::Test
     symbol = symbols.first
 
     assert_equal "sprite--trash", symbol[:id]
-    assert_equal "16px", symbol[:width]
-    assert_equal "16px", symbol[:height]
     assert_equal "currentColor", symbol.css("path").first[:fill]
+    assert_equal "0 0 16 16", symbol[:viewBox]
 
     symbol = symbols.last
 
     assert_equal "sprite--trash-filled", symbol[:id]
-    assert_equal "16px", symbol[:width]
-    assert_equal "16px", symbol[:height]
     assert_equal "currentColor", symbol.css("g > g").first[:fill]
+    assert_equal "0 0 16 16", symbol[:viewBox]
   end
 
   test "generates svg file without optimization" do
@@ -116,6 +112,21 @@ class SvgSpriteTest < Minitest::Test
 
     assert_equal 1, svg.css("g#trash").count
     assert svg.css("title").any?
+  end
+
+  test "removes with and height attributes" do
+    SvgSprite.call(
+      input: input,
+      sprite_path: sprite_path,
+      css_path: css_path,
+      optimize: false
+    )
+
+    xml = Nokogiri::XML(File.read(sprite_path))
+    svg = xml.css("symbol").first
+
+    refute_includes svg.attributes.keys, "width"
+    refute_includes svg.attributes.keys, "height"
   end
 
   test "generates command comment on css file" do
