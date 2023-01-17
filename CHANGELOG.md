@@ -11,7 +11,7 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
-## Unreleased
+## v1.0.3
 
 - [Changed] SVG sprite won't include `display: none` anymore; instead, a class
   `:name--sprite` is added. This eases the CSP setups, as it won't include a
