@@ -55,7 +55,7 @@ class SvgSpriteTest < Minitest::Test
     svg = xml.css("svg").first
     symbols = svg.css("defs > symbol")
 
-    assert_equal "display: none", svg[:style]
+    assert_equal "sprite--sprite", svg[:class]
     assert_equal 2, symbols.count
 
     symbol = symbols.first
@@ -114,7 +114,7 @@ class SvgSpriteTest < Minitest::Test
     assert svg.css("title").any?
   end
 
-  test "removes with and height attributes" do
+  test "removes width and height attributes" do
     SvgSprite.call(
       input: input,
       sprite_path: sprite_path,

@@ -1,7 +1,6 @@
 # svg_sprite
 
 [![Tests](https://github.com/fnando/svg_sprite/workflows/ruby-tests/badge.svg)](https://github.com/fnando/svg_sprite)
-[![Code Climate](https://codeclimate.com/github/fnando/svg_sprite/badges/gpa.svg)](https://codeclimate.com/github/fnando/svg_sprite)
 [![Gem](https://img.shields.io/gem/v/svg_sprite.svg)](https://rubygems.org/gems/svg_sprite)
 [![Gem](https://img.shields.io/gem/dt/svg_sprite.svg)](https://rubygems.org/gems/svg_sprite)
 
@@ -165,18 +164,18 @@ SvgSprite.call(
 
 ## Contributors
 
-- https://github.com/fnando/svg_sprite/contributors
+- <https://github.com/fnando/svg_sprite/contributors>
 
 ## Contributing
 
 For more details about how to contribute, please read
-https://github.com/fnando/svg_sprite/blob/main/CONTRIBUTING.md.
+<https://github.com/fnando/svg_sprite/blob/main/CONTRIBUTING.md>.
 
 ## License
 
 The gem is available as open source under the terms of the
 [MIT License](https://opensource.org/licenses/MIT). A copy of the license can be
-found at https://github.com/fnando/svg_sprite/blob/main/LICENSE.md.
+found at <https://github.com/fnando/svg_sprite/blob/main/LICENSE.md>.
 
 ## Code of Conduct
 

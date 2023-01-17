@@ -134,7 +134,7 @@ class SvgSprite
     Nokogiri::XML::Builder.new(encoding: "UTF-8") do |xml|
       xml.svg(
         xmlns: "http://www.w3.org/2000/svg",
-        style: "display: none"
+        class: "#{name}--sprite"
       ) do |svg|
         svg.defs { } # rubocop:disable Lint/EmptyBlock
       end

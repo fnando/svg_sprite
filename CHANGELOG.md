@@ -11,6 +11,13 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
+## Unreleased
+
+- [Changed] SVG sprite won't include `display: none` anymore; instead, a class
+  `:name--sprite` is added. This eases the CSP setups, as it won't include a
+  inline style. Make sure you hide the sprite with something like
+  `.icon--sprite { display: none }`.
+
 ## v1.0.2
 
 - [Changed] Remove `<symbol>`'s `width` and `height` property, otherwise Google
