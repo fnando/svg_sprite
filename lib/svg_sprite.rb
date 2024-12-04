@@ -46,7 +46,7 @@ class SvgSprite
   )
     @name = name
     @input = input
-    @input_files = Dir["#{input}/**/*.svg"].sort
+    @input_files = Dir["#{input}/**/*.svg"]
     @sprite_path = sprite_path
     @css_path = css_path
     @optimize = optimize

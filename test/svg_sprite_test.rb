@@ -34,11 +34,13 @@ class SvgSpriteTest < Minitest::Test
     css_parser.load_file!(css_path)
 
     icon = css_parser.find_rule_sets([".sprite--trash"]).first
+
     refute_nil icon
     assert_equal "16px;", icon[:width]
     assert_equal "16px;", icon[:height]
 
     icon = css_parser.find_rule_sets([".sprite--trash-filled"]).first
+
     refute_nil icon
     assert_equal "16px;", icon[:width]
     assert_equal "16px;", icon[:height]
@@ -140,6 +142,7 @@ class SvgSpriteTest < Minitest::Test
 
     command = "\nsvg_sprite generate --input test/fixtures --sprite-path " \
               "tmp/sprite.svg --css-path tmp/sprite.css --no-optimize\n"
+
     assert_includes File.read(css_path), command
 
     # Using stroke and fill
@@ -154,6 +157,7 @@ class SvgSpriteTest < Minitest::Test
     command = "\nsvg_sprite generate --input test/fixtures --sprite-path " \
               "tmp/sprite.svg --css-path tmp/sprite.css --stroke " \
               "current-color --fill current-color\n"
+
     assert_includes File.read(css_path), command
 
     # Using custom name
@@ -166,6 +170,7 @@ class SvgSpriteTest < Minitest::Test
 
     command = "\nsvg_sprite generate --input test/fixtures --sprite-path " \
               "tmp/sprite.svg --css-path tmp/sprite.css --name icons\n"
+
     assert_includes File.read(css_path), command
   end
 end
