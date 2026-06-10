@@ -151,7 +151,7 @@ SvgSprite.call(
   input: "./images/icons",
   name: "icon",
   css_path: "./sprite/icons.css",
-  svg_path: "./sprite/icons.svg",
+  sprite_path: "./sprite/icons.svg",
   optimize: true,
   stroke: "remove",
   fill: remove

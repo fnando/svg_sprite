@@ -11,6 +11,10 @@ Prefix your message with one of the following:
 - [Security] in case of vulnerabilities.
 -->
 
+## Unreleased
+
+- [Fixed] README programming API example sprite path option.
+
 ## v1.0.3
 
 - [Changed] SVG sprite won't include `display: none` anymore; instead, a class
